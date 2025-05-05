@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // import '../services/notifcation.service.dart';
 import '../services/theme_service.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    super.key,
+    required this.leadingIcon,
+    required this.onLeadingPressed,
+  });
+  final IconData leadingIcon;
+  final VoidCallback onLeadingPressed;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: const Icon(Icons.nightlight_rounded, size: 20),
-        onPressed: () async {
-          ThemeService().switchTheme();
-          // await NotificationService().showNotification(
-          //   "Theme Changed",
-          //   "The app theme has been updated.",
-          // );
-        },
+        icon: Icon(
+          leadingIcon,
+          size: 20,
+          // color: Get.isDarkMode ? Colors.white : Colors.black,
+        ),
+        onPressed: onLeadingPressed,
       ),
       actions: [
-        IconButton(icon: const Icon(Icons.person, size: 20), onPressed: () {}),
+        CircleAvatar(backgroundImage: AssetImage("assets/images/pooo.jpg")),
+
+        // IconButton(icon: const Icon(Icons.person, size: 20), onPressed: () {}),
+        SizedBox(width: 20),
       ],
     );
   }
