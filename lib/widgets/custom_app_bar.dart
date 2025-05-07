@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 // import '../services/notifcation.service.dart';
-import '../services/theme_service.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({

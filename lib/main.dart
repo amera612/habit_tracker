@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:habit_tracker/db/db_helper.dart';
 
 import 'package:habit_tracker/views/home_page.dart';
 import 'core/theme.dart';
 import 'services/theme_service.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DbHelper.initDb();
   await GetStorage.init();
   runApp(const MyApp());
 }

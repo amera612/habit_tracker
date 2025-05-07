@@ -1,11 +1,12 @@
-import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+
+import 'package:habit_tracker/controllers/task_controller.dart';
 import 'package:habit_tracker/services/theme_service.dart';
+import 'package:habit_tracker/widgets/add_data_section.dart';
 import 'package:habit_tracker/widgets/add_task_section.dart';
 import 'package:habit_tracker/widgets/custom_app_bar.dart';
-
-import '../core/constant.dart';
 
 // import '../services/notifcation.service.dart';
 
@@ -18,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // final NotificationService notificationService = NotificationService();
+  final taskController = Get.put(TaskController());
   DateTime selectedDate = DateTime.now();
   @override
   void initState() {
@@ -45,48 +47,37 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             AddTask(),
-            Container(
-              height: 110,
-
-              margin: const EdgeInsets.only(top: 20, left: 20),
-              child: DatePicker(
-                DateTime.now(),
-                height: 110,
-                width: 90,
-                initialSelectedDate: DateTime.now(),
-                selectionColor: primaryClr,
-                selectedTextColor: Colors.white,
-                dateTextStyle: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
-                ),
-                dayTextStyle: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
-                ),
-                monthTextStyle: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
-                ),
-                onDateChange: (date) {
-                  setState(() {
-                    selectedDate = date;
-                  });
-                },
-              ),
+            AddDataSection(
+              selectedDate: selectedDate,
+              onDateChange: (newDate) {
+                setState(() {
+                  selectedDate = newDate;
+                });
+              },
             ),
+
+            showTasks(),
           ],
         ),
       ),
+    );
+  }
+
+  showTasks() {
+    return Expanded(
+      child: Obx(() {
+        return ListView.builder(
+          itemCount: taskController.taskList.length,
+          itemBuilder: (_, context) {
+            return Container(
+              margin: const EdgeInsets.only(top: 20, left: 20),
+              width: 100,
+              height: 100,
+              color: Colors.amber,
+            );
+          },
+        );
+      }),
     );
   }
 }

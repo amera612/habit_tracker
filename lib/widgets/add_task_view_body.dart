@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:habit_tracker/controllers/task_controller.dart';
 import 'package:habit_tracker/core/constant.dart';
 import 'package:habit_tracker/core/helper.dart';
+import 'package:habit_tracker/models/task.dart';
 import 'package:habit_tracker/widgets/custom_button.dart';
 import 'package:intl/intl.dart';
-
 import 'custom_text_field.dart';
 
 class AddTaskViewBody extends StatefulWidget {
@@ -15,6 +16,7 @@ class AddTaskViewBody extends StatefulWidget {
 }
 
 class _AddTaskViewBodyState extends State<AddTaskViewBody> {
+  final TaskController taskController = Get.put(TaskController());
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   TimeOfDay startTime = TimeOfDay.now();
@@ -153,7 +155,7 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16.0), //symmetric(8.0),
+              padding: const EdgeInsets.only(top: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,10 +171,24 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
                   CustomButton(
                     label: "Create Task",
                     onTap: () {
+                      final task = Task(
+                        title: titleController.text,
+                        note: noteController.text,
+                        date: DateFormat.yMd().format(selectedDate),
+                        startTime: startTime.format(context),
+                        endTime: endTime.format(context),
+                        color: selectedIndex,
+                        remind: selectReminder,
+                        repeat: selectedRepeat,
+                        isCompleted: 0,
+                      );
+
                       Helper.validateData(
-                        context,
-                        titleController,
-                        noteController,
+                        context: context,
+                        titleController: titleController,
+                        noteController: noteController,
+                        task: task,
+                        taskController: taskController,
                       );
                     },
                   ),
@@ -182,6 +198,25 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
           ],
         ),
       ),
+    );
+  }
+
+  addTaskToDB() async {
+    int value = await taskController.addTask(
+      task: Task(
+        title: titleController.text,
+        note: noteController.text,
+        date: DateFormat.yMd().format(DateTime.now()),
+        startTime: startTime.format(context),
+        endTime: endTime.format(context),
+        color: selectedIndex,
+        remind: selectReminder,
+        repeat: selectedRepeat,
+        isCompleted: 0,
+      ),
+    );
+    print(
+      "\n mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm my id is $value\n",
     );
   }
 }

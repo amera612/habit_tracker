@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:habit_tracker/controllers/task_controller.dart';
+import 'package:habit_tracker/models/task.dart';
 
 import 'constant.dart';
 
@@ -40,6 +44,7 @@ class Helper {
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
                 child: CircleAvatar(
+                  radius: 14,
                   backgroundColor: color,
                   child:
                       selectedIndex == index
@@ -58,19 +63,21 @@ class Helper {
     );
   }
 
-  static void validateData(
-    BuildContext context,
-    TextEditingController titleController,
-    TextEditingController noteController,
-  ) {
+  static void validateData({
+    required BuildContext context,
+    required TextEditingController titleController,
+    required TextEditingController noteController,
+    required Task task,
+    required TaskController taskController,
+  }) {
     if (titleController.text.isNotEmpty && noteController.text.isNotEmpty) {
+      addTaskToDB(task: task, taskController: taskController);
       Get.back();
     } else if (titleController.text.isEmpty) {
       Get.snackbar(
         "Required",
         "Title is Required",
         snackPosition: SnackPosition.BOTTOM,
-        // backgroundColor: Colors.white,
         icon: const Icon(Icons.warning_amber_rounded),
       );
     } else if (noteController.text.isEmpty) {
@@ -81,5 +88,13 @@ class Helper {
         icon: const Icon(Icons.warning_amber_rounded),
       );
     }
+  }
+
+  static Future<void> addTaskToDB({
+    required Task task,
+    required TaskController taskController,
+  }) async {
+    int value = await taskController.addTask(task: task);
+    log("Task inserted with id = $value");
   }
 }

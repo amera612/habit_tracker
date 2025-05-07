@@ -30,7 +30,12 @@ class AddTask extends StatelessWidget {
               Text("Today", style: headingStyle),
             ],
           ),
-          CustomButton(label: '+ Add Task', onTap: () => Get.to(AddTaskView())),
+          CustomButton(
+            label: '+ Add Task',
+            onTap: () async {
+              await Get.to(AddTaskView());
+            },
+          ),
         ],
       ),
     );
