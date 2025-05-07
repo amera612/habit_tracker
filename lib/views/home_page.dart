@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import 'package:habit_tracker/controllers/task_controller.dart';
 import 'package:habit_tracker/services/theme_service.dart';
@@ -30,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface, //🫵🫵🫵🫵s
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: CustomAppBar(
@@ -56,28 +56,28 @@ class _HomePageState extends State<HomePage> {
               },
             ),
 
-            showTasks(),
+            //showTasks(),
           ],
         ),
       ),
     );
   }
 
-  showTasks() {
-    return Expanded(
-      child: Obx(() {
-        return ListView.builder(
-          itemCount: taskController.taskList.length,
-          itemBuilder: (_, context) {
-            return Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
-              width: 100,
-              height: 100,
-              color: Colors.amber,
-            );
-          },
-        );
-      }),
-    );
-  }
+  // showTasks() {
+  //   return Expanded(
+  //     child: Obx(() {
+  //       return ListView.builder(
+  //         itemCount: taskController.taskList.length,
+  //         itemBuilder: (_, context) {
+  //           return Container(
+  //             margin: const EdgeInsets.only(top: 20, left: 20),
+  //             width: 100,
+  //             height: 100,
+  //             color: Colors.amber,
+  //           );
+  //         },
+  //       );
+  //     }),
+  //   );
+  // }
 }
