@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
           //print(task.toJson());
           if(task.repeat=='Daily'){
             DateTime date = DateFormat.jm().parse(task.startTime.toString());
-            var myTime =DateFormat("HH:mm").format(date);
+            //var myTime =DateFormat("HH:mm").format(date);
             //notifyHelper.scheduledNotificatinon();
             return AnimationConfiguration.staggeredList(position: index,
                 child: SlideAnimation(child: FadeInAnimation(
