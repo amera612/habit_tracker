@@ -42,7 +42,7 @@ class DbHelper {
     return await _db?.insert(_tableName, task!.toJson()) ?? 1;
   }
 
-  static Future<int> update(int id, Map<String, dynamic> updatedData) async {
+  static Future<int> updateA(int id, Map<String, dynamic> updatedData) async {
     return await _db!.update(
       _tableName,
       updatedData,
@@ -51,12 +51,18 @@ class DbHelper {
     );
   }
 
-  static Future<int> delete(int id) async {
+  static Future<int> deleteA(int id) async {
     return await _db!.delete(_tableName, where: 'id = ?', whereArgs: [id]);
   }
 
   static Future<List<Map<String, dynamic>>> query() async {
     // final List<Map<String, dynamic>> tasks = await _db!.query(_tableName);
     return await _db!.query(_tableName);
+  }
+  static delete (Task task)async{
+     return await _db!.delete(_tableName,where: 'id=?',whereArgs: [task.id]);
+  }
+  static update(int id) async {
+    return await _db!.rawUpdate('''UPDATE tasks SET isCompleted =? WHERE id =?''',[1, id]);
   }
 }

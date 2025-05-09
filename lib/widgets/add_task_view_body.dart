@@ -189,6 +189,7 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
                         noteController: noteController,
                         task: task,
                         taskController: taskController,
+
                       );
                     },
                   ),

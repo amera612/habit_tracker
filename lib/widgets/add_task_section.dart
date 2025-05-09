@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:habit_tracker/controllers/task_controller.dart';
 import 'package:habit_tracker/views/add_task_view.dart';
 import 'package:habit_tracker/widgets/custom_button.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +8,9 @@ import 'package:intl/intl.dart';
 import '../core/constant.dart';
 
 class AddTask extends StatelessWidget {
-  const AddTask({super.key});
+  const AddTask(TaskController taskController, {super.key});
+
+  get taskController => null;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class AddTask extends StatelessWidget {
             label: '+ Add Task',
             onTap: () async {
               await Get.to(AddTaskView());
+              taskController.getTask();
             },
           ),
         ],

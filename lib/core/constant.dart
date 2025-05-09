@@ -6,8 +6,8 @@ const Color bluishClr = Color(0xFF4e5ae8);
 const Color urgentClr = Color(0xFFE57373);
 
 const Color greenClr = Color(0xFF4CAF50); // إنجاز / إنتاجية
-// const Color skyBlueClr = Color(0xFF03A9F4); // راحة / تأمل
-// const Color amberClr = Color(0xFFFFC107);
+const Color skyBlueClr = Color(0xFF03A9F4); // راحة / تأمل
+const Color amberClr = Color(0xFFFFC107);
 //   // مهم وعاجل
 // const Color moderateClr = Color(0xFFFFF176);  // مهم لكن مش عاجل
 // const Color postponedClr = Color(0xFF9E9E9E); // ممكن يتأجل
