@@ -15,14 +15,14 @@ import '../widgets/TaskTile.dart';
 
 // import '../services/notifcation.service.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeViewState extends State<HomeView> {
   // final NotificationService notificationService = NotificationService();
 
   final taskController = Get.put(TaskController());
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 });
               },
             ),
-            SizedBox(height: 15,),
+            SizedBox(height: 15),
             showTasks(),
           ],
         ),
@@ -80,43 +80,47 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (_, index) {
           Task task = taskController.taskList[index];
           //print(task.toJson());
-          if(task.repeat=='Daily'){
+          if (task.repeat == 'Daily') {
             DateTime date = DateFormat.jm().parse(task.startTime.toString());
             //var myTime =DateFormat("HH:mm").format(date);
             //notifyHelper.scheduledNotificatinon();
-            return AnimationConfiguration.staggeredList(position: index,
-                child: SlideAnimation(child: FadeInAnimation(
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: (){
-                            _ShowBottomSheet(context,task);
-                          },
-                          child: TaskTile(task),
-                        )
-
-                      ],
-                    )))
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              child: SlideAnimation(
+                child: FadeInAnimation(
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _ShowBottomSheet(context, task);
+                        },
+                        child: TaskTile(task),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             );
-
           }
-          if(task.date==DateFormat.yMd().format(selectedDate)){
-            return AnimationConfiguration.staggeredList(position: index,
-                child: SlideAnimation(child: FadeInAnimation(
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: (){
-                            _ShowBottomSheet(context,task);
-                          },
-                          child: TaskTile(task),
-                        )
-
-                      ],
-                    )))
+          if (task.date == DateFormat.yMd().format(selectedDate)) {
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              child: SlideAnimation(
+                child: FadeInAnimation(
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _ShowBottomSheet(context, task);
+                        },
+                        child: TaskTile(task),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             );
-
-          }else{
+          } else {
             return Container();
           }
         },
@@ -124,16 +128,18 @@ class _HomePageState extends State<HomePage> {
     });
   }
 }
-_ShowBottomSheet(BuildContext context ,Task task){
-  final taskController = Get.put(TaskController());
 
+_ShowBottomSheet(BuildContext context, Task task) {
+  final taskController = Get.put(TaskController());
 
   Get.bottomSheet(
     Container(
       padding: EdgeInsets.only(top: 4),
-      height: task.isCompleted==1?MediaQuery.of(context).size.height*0.24:
-      MediaQuery.of(context).size.height*0.32,
-      color: Get.isDarkMode?darkGreyClr:Colors.white,
+      height:
+          task.isCompleted == 1
+              ? MediaQuery.of(context).size.height * 0.24
+              : MediaQuery.of(context).size.height * 0.32,
+      color: Get.isDarkMode ? darkGreyClr : Colors.white,
       child: Column(
         children: [
           Container(
@@ -141,73 +147,80 @@ _ShowBottomSheet(BuildContext context ,Task task){
             width: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Get.isDarkMode?Colors.grey[600]:Colors.grey[300]
+              color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300],
             ),
           ),
           Spacer(),
-          task.isCompleted==1
-          ?Container()
-              :_bottomSheetButton(
-              Label: "Task Completed",
-              onTap: (){
-                taskController.markTaskCompleted(task.id!);
-                Get.back();
-
-              },
-              clr: primaryClr,
-              context:context,
-          ),
+          task.isCompleted == 1
+              ? Container()
+              : _bottomSheetButton(
+                Label: "Task Completed",
+                onTap: () {
+                  taskController.markTaskCompleted(task.id!);
+                  Get.back();
+                },
+                clr: primaryClr,
+                context: context,
+              ),
           _bottomSheetButton(
             Label: "Delete Task",
-            onTap: (){
+            onTap: () {
               taskController.delete(task);
               Get.back();
             },
             clr: Colors.red[300]!,
-            context:context,
+            context: context,
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 20),
           _bottomSheetButton(
             Label: "Close Task",
-            onTap: (){
+            onTap: () {
               Get.back();
             },
             clr: Colors.red[300]!,
             isClose: true,
-            context:context,
+            context: context,
           ),
-          SizedBox(height: 15,),
-
+          SizedBox(height: 15),
         ],
       ),
-
-    )
+    ),
   );
-
 }
+
 _bottomSheetButton({
   required String Label,
   required Function()? onTap,
   required Color clr,
-  bool isClose=false,
+  bool isClose = false,
   required BuildContext context,
-}){
+}) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       height: 55,
-      width: MediaQuery.of(context).size.width*0.9,
+      width: MediaQuery.of(context).size.width * 0.9,
       decoration: BoxDecoration(
         border: Border.all(
           width: 2,
-          color: isClose==true?Get.isDarkMode? Colors.grey[600]!:Colors.grey[300]! :clr
+          color:
+              isClose == true
+                  ? Get.isDarkMode
+                      ? Colors.grey[600]!
+                      : Colors.grey[300]!
+                  : clr,
         ),
         borderRadius: BorderRadius.circular(20),
-        color: isClose==true?Colors.transparent:clr,
-
+        color: isClose == true ? Colors.transparent : clr,
       ),
-      child: Center(child: Text(Label,style: isClose?titleStyle:titleStyle.copyWith(color: Colors.white),)),
+      child: Center(
+        child: Text(
+          Label,
+          style:
+              isClose ? titleStyle : titleStyle.copyWith(color: Colors.white),
+        ),
+      ),
     ),
   );
 }

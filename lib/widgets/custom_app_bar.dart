@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget {
         onPressed: onLeadingPressed,
       ),
       actions: [
-        CircleAvatar(backgroundImage: AssetImage("assets/images/pooo.jpg")),
+        CircleAvatar(backgroundImage: AssetImage("assets/images/pooo.png")),
 
         // IconButton(icon: const Icon(Icons.person, size: 20), onPressed: () {}),
         SizedBox(width: 20),

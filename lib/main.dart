@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:habit_tracker/db/db_helper.dart';
 
-import 'package:habit_tracker/views/home_page.dart';
+import 'package:habit_tracker/views/home_view.dart';
 import 'core/theme.dart';
 import 'services/theme_service.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: Themes.light,
       darkTheme: Themes.dark,
       themeMode: ThemeService().theme,
-      home: const HomePage(),
+      home: const HomeView(),
     );
   }
 }

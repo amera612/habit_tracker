@@ -32,6 +32,8 @@ dependencies:
   date_picker_timeline: ^1.2.3
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.4.6
+  flutter_staggered_animations: ^1.0.0
   get: ^4.7.2
   get_storage: ^2.1.1
   google_fonts: ^4.0.3
@@ -39,7 +41,20 @@ dependencies:
   path: ^1.9.1
   sqflite: ^2.4.2
   timezone: ^0.10.1
-  flutter_staggered_animations: ^1.0.0
+
+flutter_native_splash:
+  color: "#ffffff"                      # خلفية بيضاء في الوضع الفاتح
+  color_dark: "#000000"                # خلفية سوداء في الوضع الداكن
+  image: assets/images/logoo.png       # صورة السلاش في الوضع الفاتح
+  image_dark: assets/images/logoo.png  # صورة السلاش في الوضع الداكن (نفس الصورة هنا، ممكن تغيريها لو حبيتي)
+  
+  android_12:
+    image: assets/images/logoo.png
+    image_dark: assets/images/logoo.png
+    icon_background_color: "#ffffff"
+    icon_background_color_dark: "#ffffff"  # خلفية أيقونة Android 12 في الوضع الداكن
+
+  web: false  # مش مفعّلة للويب
 
 
 dev_dependencies:

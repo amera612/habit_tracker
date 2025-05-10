@@ -8,18 +8,14 @@ import 'package:intl/intl.dart';
 import '../core/constant.dart';
 
 class AddTask extends StatelessWidget {
-  const AddTask(TaskController taskController, {super.key});
+  final TaskController taskController;
 
-  get taskController => null;
+  const AddTask(this.taskController, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 10,
-        left: 20,
-        right: 20,
-      ), //symmetric(8.0),
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -37,7 +33,7 @@ class AddTask extends StatelessWidget {
             label: '+ Add Task',
             onTap: () async {
               await Get.to(AddTaskView());
-              taskController.getTask();
+              taskController.getTasks(); // ده كده مش هيرجع null
             },
           ),
         ],
