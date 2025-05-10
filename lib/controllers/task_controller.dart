@@ -6,15 +6,15 @@ import 'package:habit_tracker/models/task.dart';
 class TaskController extends GetxController {
   var taskList = <Task>[].obs;
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  // @override
+  // void onReady() {
+  //   super.onReady();
+  // }
 
   Future<int> addTask({Task? task}) async {
     //🫵🫵🫵🫵A
     taskList.add(task!);
-    return await DbHelper.insert(task!);
+    return await DbHelper.insert(task);
   }
 
   void getTasks() async {

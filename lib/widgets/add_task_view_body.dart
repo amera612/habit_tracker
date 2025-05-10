@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:habit_tracker/controllers/task_controller.dart';
 import 'package:habit_tracker/core/constant.dart';
-import 'package:habit_tracker/core/helper.dart';
+import 'package:habit_tracker/db/helper.dart';
 import 'package:habit_tracker/models/task.dart';
 import 'package:habit_tracker/widgets/custom_button.dart';
 import 'package:intl/intl.dart';
@@ -189,7 +189,6 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
                         noteController: noteController,
                         task: task,
                         taskController: taskController,
-
                       );
                     },
                   ),
