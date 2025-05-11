@@ -215,8 +215,5 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
         isCompleted: 0,
       ),
     );
-    print(
-      "\n mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm my id is $value\n",
-    );
   }
 }
