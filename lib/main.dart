@@ -6,6 +6,7 @@ import 'package:habit_tracker/db/db_helper.dart';
 import 'package:habit_tracker/views/home_view.dart';
 import 'core/theme.dart';
 import 'services/theme_service.dart';
+import 'views/onboarding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +20,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    bool isFirstTime = box.read("isFirstTime") ?? true;
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Themes.light,
       darkTheme: Themes.dark,
       themeMode: ThemeService().theme,
-      home: const HomeView(),
+      home: isFirstTime ? const OnboardingView() : const HomeView(),
     );
   }
 }
