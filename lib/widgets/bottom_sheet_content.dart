@@ -23,11 +23,18 @@ class BottomSheetContent extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 6,
-            width: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300],
+            width: double.infinity,
+            child: Column(
+              children: [
+                Container(
+                  height: 6,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300],
+                  ),
+                ),
+              ],
             ),
           ),
           const Spacer(),
