@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:habit_tracker/db/db_helper.dart';
 
 import 'package:habit_tracker/views/home_view.dart';
+import 'controllers/task_controller.dart';
 import 'core/theme.dart';
 import 'services/theme_service.dart';
 import 'views/onboarding.dart';
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DbHelper.initDb();
   await GetStorage.init();
+  Get.put(TaskController());
   runApp(const MyApp());
 }
 

@@ -10,6 +10,11 @@ class TaskController extends GetxController {
   // void onReady() {
   //   super.onReady();
   // }
+  @override
+  void onInit() {
+    super.onInit();
+    getTasks();
+  }
 
   Future<int> addTask({Task? task}) async {
     //🫵🫵🫵🫵A

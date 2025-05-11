@@ -19,8 +19,14 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-  final taskController = Get.put(TaskController());
+  final TaskController taskController = Get.find<TaskController>();
   DateTime selectedDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    taskController.getTasks();
+  }
 
   @override
   Widget build(BuildContext context) {
