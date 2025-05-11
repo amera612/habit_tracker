@@ -6,7 +6,6 @@ import 'package:habit_tracker/controllers/task_controller.dart';
 import 'package:habit_tracker/models/task.dart';
 
 import '../core/constant.dart';
-import '../widgets/bottom_sheet_button.dart';
 
 class Helper {
   static Future<DateTime?> getDateFromUser(BuildContext context) async {
@@ -98,61 +97,4 @@ class Helper {
     int value = await taskController.addTask(task: task);
     log("Task inserted with id = $value");
   }
-
-  // static void showBottomSheet(BuildContext context, Task task) {
-  //   final taskController = Get.put(TaskController());
-
-  //   Get.bottomSheet(
-  //     Container(
-  //       padding: const EdgeInsets.only(top: 4),
-  //       height:
-  //           task.isCompleted == 1
-  //               ? MediaQuery.of(context).size.height * 0.24
-  //               : MediaQuery.of(context).size.height * 0.32,
-  //       color: Get.isDarkMode ? darkGreyClr : Colors.white,
-  //       child: Column(
-  //         children: [
-  //           Container(
-  //             height: 6,
-  //             width: 120,
-  //             decoration: BoxDecoration(
-  //               borderRadius: BorderRadius.circular(10),
-  //               color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300],
-  //             ),
-  //           ),
-  //           const Spacer(),
-  //           if (task.isCompleted != 1)
-  //             BottomSheetButton(
-  //               label: "Task Completed",
-  //               onTap: () {
-  //                 taskController.markTaskCompleted(task.id!);
-  //                 Get.back();
-  //               },
-  //               clr: primaryClr,
-  //             ),
-
-  //           BottomSheetButton(
-  //             label: "Delete Task",
-  //             onTap: () {
-  //               taskController.delete(task);
-  //               Get.back();
-  //             },
-  //             clr: Colors.red[300]!,
-  //           ),
-
-  //           const SizedBox(height: 20),
-
-  //           BottomSheetButton(
-  //             label: "Close",
-  //             onTap: () => Get.back(),
-  //             clr: Colors.red[300]!,
-  //             isClose: true,
-  //           ),
-
-  //           const SizedBox(height: 15),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

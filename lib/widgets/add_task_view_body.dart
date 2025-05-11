@@ -200,20 +200,4 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
       ),
     );
   }
-
-  addTaskToDB() async {
-    int value = await taskController.addTask(
-      task: Task(
-        title: titleController.text,
-        note: noteController.text,
-        date: DateFormat.yMd().format(DateTime.now()),
-        startTime: startTime.format(context),
-        endTime: endTime.format(context),
-        color: selectedIndex,
-        remind: selectReminder,
-        repeat: selectedRepeat,
-        isCompleted: 0,
-      ),
-    );
-  }
 }
